@@ -1,7 +1,7 @@
 # User Profile Card List
 This project dynamically generates a list of user profile cards using vanilla JavaScript. Each card presents an employee's name, job title, skills, country, and avatar image in a clean, responsive layout.
 
-![Screenshot of User Profile Card List](image/screenshot.png)
+![Screenshot of User Profile Card List](image/Screenshot.png)
 
 ## Features
 - **Object-Oriented Design**: Uses an `Employee` class for modular and maintainable code.
