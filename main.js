@@ -15,7 +15,11 @@ class Employee {
 
   appendToProfileList(innerFlex) {
     const profiles = document.getElementById('profiles');
-    if (profiles) profiles.append(innerFlex);
+    if (profiles) {
+      profiles.append(innerFlex);
+    } else {
+      console.warn('Element with id "profiles" not found. Please ensure it exists in the HTML.');
+    }
   }
 
   createInfoBlock(label, value) {
@@ -31,7 +35,7 @@ class Employee {
   createEmployeeCard() {
     // Main card wrapper
     const innerFlex = document.createElement('div');
-    innerFlex.classList.add('d-flex', 'align-items-center', 'col-md-7', 'col-10', 'm-1');
+    innerFlex.classList.add('d-flex', 'align-items-center', 'col-md-7', 'col-10', 'my-2');
 
     // Card container
     const cardDiv = document.createElement('div');
@@ -40,10 +44,10 @@ class Employee {
 
     // Left info section of the card
     const leftInfo = document.createElement('div');
-    leftInfo.classList = 'col-8','py-3';
+    leftInfo.classList.add('col-8','py-3');
     
-    const nameTitle = document.createElement('h4');
-    nameTitle.textContext = this.getFullName();
+    const nameTitle = document.createElement('h3');
+    nameTitle.textContent = this.getFullName();
 
     leftInfo.append(
       nameTitle,
@@ -52,17 +56,17 @@ class Employee {
       this.createInfoBlock('Country', this.country)
     );
 
-    // Create the right side of the card
-    let rightInfo = document.createElement('div');
+    // Right info section of the card with avatar
+    const rightInfo = document.createElement('div');
     rightInfo.classList.add('col-4', 'd-flex', 'justify-content-center', 'align-items-center');
-    let div4 = document.createElement('div');
+    // let div4 = document.createElement('div');
 
-    let avatar = document.createElement('img');
-    avatar.classList.add('avatar');
+    const avatar = document.createElement('img');
+    avatar.className = 'avatar';
     avatar.src = this.avatarUrl;
+    avatar.alt = `${this.firstName} ${this.lastName}'s avatar`;
 
-    div4.append(avatar);
-    rightInfo.append(div4);
+    rightInfo.append(avatar);
 
     cardDiv.append(leftInfo, rightInfo);
     
@@ -71,10 +75,22 @@ class Employee {
 }
 
 // Create employee instances 
-const employee1 = new Employee("Kaiden", "Herman", "Software Engineer", "C++, C#, Java, PHP, JavaScript, Python","United States", "https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg");
-const employee2 = new Employee("Elizabeth", "Dunn", "Accountant", "Excel, Word, Quickbooks", "England", "https://randomuser.me/api/portraits/women/76.jpg");
-const employee3 = new Employee("Duan", "Moreno", "Teacher",  "Working with children, History, Word", "Argentina", "https://randomuser.me/api/portraits/med/men/93.jpg");
-
-// Create an array of employees and map through it to create employee cards
-const employees = [employee1, employee2, employee3];
-employees.map(employee => employee.createEmployeeCard());
+const employees = [
+  new Employee("Kaiden", "Herman", "Software Engineer", 
+    "C++, C#, Java, PHP, JavaScript, Python",
+    "United States", 
+    "https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg"
+  ),
+  new Employee("Elizabeth", "Dunn", "Accountant", 
+    "Excel, Word, Quickbooks", 
+    "England", 
+    "https://randomuser.me/api/portraits/women/76.jpg"
+  ),
+  new Employee("Duan", "Moreno", "Teacher",  
+    "Working with children, History, Word", 
+    "Argentina", 
+    "https://randomuser.me/api/portraits/med/men/93.jpg"
+  )
+];
+// Render all employee cards
+employees.forEach(employee => employee.createEmployeeCard());
