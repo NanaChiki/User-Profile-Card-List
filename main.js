@@ -1,3 +1,4 @@
+// Description: This code creates a list of employee profile cards with their details and appends them to the DOM
 class Employee {
   constructor(firstName, lastName, job, skills, country, avatarUrl) {
     this.firstName = firstName;
@@ -17,39 +18,39 @@ class Employee {
     if (profiles) profiles.append(innerFlex);
   }
 
+  createInfoBlock(label, value) {
+    const div = document.createElement('div');
+    div.classList.add('py-2');
+    const p = document.createElement('p');
+    p.innerHTML = `<strong>${label}:</strong><br>${value}`;
+    div.append(p);
+    return div;
+  }
+
+  // Create the employee card and append it to the element with id 'profiles'
   createEmployeeCard() {
-    let innerFlex = document.createElement('div');
+    // Main card wrapper
+    const innerFlex = document.createElement('div');
     innerFlex.classList.add('d-flex', 'align-items-center', 'col-md-7', 'col-10', 'm-1');
 
-    let cardDiv = document.createElement('div');
+    // Card container
+    const cardDiv = document.createElement('div');
     cardDiv.classList.add('d-flex', 'col-12', 'profile-card');
     innerFlex.append(cardDiv);
 
-    // Create the left side of the card
-    let leftInfo = document.createElement('div');
-    leftInfo.classList.add('col-8','py-3');
+    // Left info section of the card
+    const leftInfo = document.createElement('div');
+    leftInfo.classList = 'col-8','py-3';
     
-    let div1 = document.createElement('div');
-    div1.classList.add('py-2');
-    let div2 = div1.cloneNode(true);
-    let div3 = div1.cloneNode(true);
+    const nameTitle = document.createElement('h4');
+    nameTitle.textContext = this.getFullName();
 
-    let nameTitle = document.createElement('h4');
-    nameTitle.innerHTML = this.getFullName();
-
-    let employeeJob = document.createElement('p');
-    employeeJob.innerHTML = 'Job: <br>' + this.job;
-
-    let employeeSkills = document.createElement('p');
-    employeeSkills.innerHTML = 'Skills: <br>' + this.skills;
-
-    let employeeCountry = document.createElement('p');
-    employeeCountry.innerHTML = 'Country: <br>' + this.country;
-
-    div1.append(employeeJob);
-    div2.append(employeeSkills);
-    div3.append(employeeCountry);
-    leftInfo.append(nameTitle, div1, div2, div3);
+    leftInfo.append(
+      nameTitle,
+      this.createInfoBlock('Job', this.job),
+      this.createInfoBlock('Skills', this.skills),
+      this.createInfoBlock('Country', this.country)
+    );
 
     // Create the right side of the card
     let rightInfo = document.createElement('div');
@@ -69,10 +70,11 @@ class Employee {
   }
 }
 
+// Create employee instances 
 const employee1 = new Employee("Kaiden", "Herman", "Software Engineer", "C++, C#, Java, PHP, JavaScript, Python","United States", "https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg");
 const employee2 = new Employee("Elizabeth", "Dunn", "Accountant", "Excel, Word, Quickbooks", "England", "https://randomuser.me/api/portraits/women/76.jpg");
 const employee3 = new Employee("Duan", "Moreno", "Teacher",  "Working with children, History, Word", "Argentina", "https://randomuser.me/api/portraits/med/men/93.jpg");
 
-employee1.createEmployeeCard();
-employee2.createEmployeeCard();
-employee3.createEmployeeCard();
+// Create an array of employees and map through it to create employee cards
+const employees = [employee1, employee2, employee3];
+employees.map(employee => employee.createEmployeeCard());
