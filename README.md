@@ -72,8 +72,5 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## Error Handling
 If the container with id `profiles` is not found in the HTML, a warning will be logged in the browser console.
 
-## License
-This project is open-source and available under the MIT License.
-
 ---
 Enjoy building and customizing your user profile card list!
